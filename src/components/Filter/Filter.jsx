@@ -10,7 +10,7 @@ const Filter = ({ value, onChange }) => {
       <input
         type="text"
         name="filter"
-        placeholder="Search..."
+        placeholder="Find..."
         className={styles.input}
         value={value}
         onChange={onChange}
