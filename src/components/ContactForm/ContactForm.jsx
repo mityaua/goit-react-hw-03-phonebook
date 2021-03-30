@@ -57,6 +57,7 @@ class ContactForm extends Component {
           <input
             type="text"
             name="name"
+            placeholder="Contact name"
             className={styles.input}
             value={this.state.name} // Пишем значение в стейт
             onChange={this.hanldeChange} // Наблюдающий метод
@@ -70,6 +71,7 @@ class ContactForm extends Component {
           <input
             type="tel"
             name="number"
+            placeholder="Phone number"
             className={styles.input}
             value={this.state.number} // Пишем значение в стейт
             onChange={this.hanldeChange} // Наблюдающий метод
