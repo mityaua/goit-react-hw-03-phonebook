@@ -8,11 +8,14 @@ const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ul className={styles.list}>
       {contacts.map(contact => (
-        <ContactItem
-          contact={contact}
-          onDeleteContact={onDeleteContact}
-          key={contact.id}
-        />
+        <li className={styles.item} key={contact.id}>
+          <ContactItem
+            contact={contact}
+            onDeleteContact={() => {
+              onDeleteContact(contact.id); // Метод на клике, принимает ID контакта
+            }}
+          />
+        </li>
       ))}
     </ul>
   );

@@ -1,10 +1,10 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 
 import styles from './ContactForm.module.scss';
 
-class ContactForm extends Component {
+class ContactForm extends PureComponent {
   // PropTypes как статическое свойство
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
