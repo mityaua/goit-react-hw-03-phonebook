@@ -34,10 +34,21 @@ class App extends PureComponent {
   }
 
   // Вызывается после каждого обновления!
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
+    const nextContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
+
     // Сравнивает стейты, и если не равны, тогда пишет в локальное
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    if (nextContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nextContacts));
+    }
+
+    // Сравнивает стейты и закрывает модалку при различиях
+    if (
+      nextContacts.length > prevContacts.length &&
+      prevContacts.length !== 0
+    ) {
+      this.toggleModal();
     }
   }
 
