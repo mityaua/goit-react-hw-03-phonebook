@@ -1,6 +1,5 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './ContactForm.module.scss';
 
@@ -29,13 +28,7 @@ class ContactForm extends PureComponent {
   hanldeSubmit = event => {
     event.preventDefault();
 
-    const contact = {
-      id: uuidv4(),
-      name: this.state.name,
-      number: this.state.number,
-    };
-
-    this.props.onSubmit(contact); // Внешний метод в пропсах класса
+     this.props.onSubmit(this.state); // Внешний метод в пропсах класса
 
     this.resetForm();
   };

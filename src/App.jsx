@@ -8,6 +8,8 @@ import AddContactButton from './components/AddContactButton';
 import IconButton from './components/IconButton';
 import { ReactComponent as CloseIcon } from './icons/delete.svg';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import styles from './App.module.scss';
 
 class App extends PureComponent {
@@ -53,7 +55,14 @@ class App extends PureComponent {
   }
 
   // Добавляет контакт (желательно сократить или вынести)
-  addContact = newContact => {
+  addContact = data => {
+    // Создает новый контакт с ID из даты
+    const newContact = {
+      id: uuidv4(),
+      name: data.name,
+      number: data.number,
+    };
+
     // Проверка на дубликат
     const duplicateName = this.state.contacts.find(
       contact => contact.name === newContact.name,
