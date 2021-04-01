@@ -43,13 +43,13 @@ class App extends PureComponent {
       localStorage.setItem('contacts', JSON.stringify(nextContacts));
     }
 
-    // Сравнивает стейты и закрывает модалку при различиях
-    if (
-      nextContacts.length > prevContacts.length &&
-      prevContacts.length !== 0
-    ) {
-      this.toggleModal();
-    }
+    // Сравнивает стейты и закрывает модалку при различиях (нужны тесты!)
+    // if (
+    //   nextContacts.length > prevContacts.length &&
+    //   prevContacts.length !== 0
+    // ) {
+    //   this.toggleModal();
+    // }
   }
 
   // Добавляет контакт (желательно сократить или вынести)
@@ -67,6 +67,8 @@ class App extends PureComponent {
     this.setState(({ contacts }) => ({
       contacts: [newContact, ...contacts],
     }));
+
+    this.toggleModal(); // Закрывает модалку после добавления контакта
   };
 
   // Следит за полем фильтрации и пишет в стейт
