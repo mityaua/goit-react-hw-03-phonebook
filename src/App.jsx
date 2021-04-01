@@ -8,7 +8,7 @@ import AddContactButton from './components/AddContactButton';
 import IconButton from './components/IconButton';
 import { ReactComponent as CloseIcon } from './icons/delete.svg';
 
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import styles from './App.module.scss';
 
@@ -58,7 +58,7 @@ class App extends PureComponent {
   addContact = data => {
     // Создает новый контакт с ID из даты
     const newContact = {
-      id: uuidv4(),
+      id: Date.now().toString(),
       name: data.name,
       number: data.number,
     };
