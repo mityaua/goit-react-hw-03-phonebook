@@ -1,18 +1,12 @@
-import { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Container from './components/Container';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
-import Modal from './components/Modal';
-import AddContactButton from './components/AddContactButton';
-import IconButton from './components/IconButton';
-import { ReactComponent as CloseIcon } from './icons/delete.svg';
-
-// import { v4 as uuidv4 } from 'uuid';
 
 import styles from './App.module.scss';
 
-class App extends PureComponent {
+class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Doctor Who', number: '459-12-56' },
@@ -21,7 +15,6 @@ class App extends PureComponent {
       { id: 'id-4', name: 'Donna Noble', number: '227-91-26' },
     ],
     filter: '',
-    showModal: false,
   };
 
   // Вызывается один раз при маунте!
@@ -44,22 +37,17 @@ class App extends PureComponent {
     if (nextContacts !== prevContacts) {
       localStorage.setItem('contacts', JSON.stringify(nextContacts));
     }
-
-    // Сравнивает стейты и закрывает модалку при различиях (нужны тесты!)
-    // if (
-    //   nextContacts.length > prevContacts.length &&
-    //   prevContacts.length !== 0
-    // ) {
-    //   this.toggleModal();
-    // }
   }
 
-  // Добавляет контакт (желательно сократить или вынести)
+  // Добавляет контакт
   addContact = data => {
+    const normalizedName = data.name.toLowerCase();
+    const uniqId = Date.now().toString();
+
     // Создает новый контакт с ID из даты
     const newContact = {
-      id: Date.now().toString(),
-      name: data.name,
+      id: uniqId,
+      name: normalizedName,
       number: data.number,
     };
 
@@ -76,8 +64,6 @@ class App extends PureComponent {
     this.setState(({ contacts }) => ({
       contacts: [newContact, ...contacts],
     }));
-
-    this.toggleModal(); // Закрывает модалку после добавления контакта
   };
 
   // Следит за полем фильтрации и пишет в стейт
@@ -107,37 +93,16 @@ class App extends PureComponent {
     }
   };
 
-  // Переключает статус модалки
-  toggleModal = () => {
-    this.setState(state => ({
-      showModal: !state.showModal,
-    }));
-  };
-
   render() {
-    const { filter, showModal } = this.state;
+    const { filter } = this.state;
     const filteredResults = this.filterContacts();
 
     return (
       <Container>
         <h1 className={styles.title}>Phonebook</h1>
-
-        <AddContactButton onClick={this.toggleModal} />
-
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <div className={styles.close}>
-              <IconButton onClick={this.toggleModal} aria-label="Close modal">
-                <CloseIcon width="15px" height="15px" fill="#a7a1a1" />
-              </IconButton>
-            </div>
-
-            <ContactForm onSubmit={this.addContact} />
-          </Modal>
-        )}
+        <ContactForm onSubmit={this.addContact} />
 
         <h2 className={styles.title}>Contacts</h2>
-
         <Filter value={filter} onChange={this.changeFilter} />
 
         <ContactList

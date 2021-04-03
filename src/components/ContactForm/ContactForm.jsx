@@ -1,9 +1,9 @@
-import { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './ContactForm.module.scss';
 
-class ContactForm extends PureComponent {
+class ContactForm extends Component {
   // PropTypes как статическое свойство
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -70,7 +70,7 @@ class ContactForm extends PureComponent {
             className={styles.input}
             value={this.state.number} // Пишем значение в стейт
             onChange={this.hanldeChange} // Наблюдающий метод
-            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+            pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[ ]{0,1}[-s ./0-9]{0,9}$"
             title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
             required
           />

@@ -11,9 +11,6 @@ const ContactItem = ({ contact, onDeleteContact }) => {
       <a href={`tel:${contact.number}`} className={styles.number}>
         {contact.number}
       </a>
-      {/* <button className={styles.button} type="button" onClick={onDeleteContact}>
-        Delete
-      </button> */}
       <IconButton onClick={onDeleteContact} aria-label="Delete contact">
         <DeleteIcon width="20px" height="20px" fill="#a7a1a1" />
       </IconButton>
